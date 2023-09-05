@@ -14,18 +14,18 @@ namespace Forum.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly ILoggerManager _logger;
+        //private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IAuthenticationManager _authenticationManager;
         private readonly IRepositoryManager _repository;
 
-        public AuthenticationController(ILoggerManager logger, IMapper mapper, 
+        public AuthenticationController(IMapper mapper, 
             UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, 
             IAuthenticationManager authenticationManager, IRepositoryManager repository)
         {
-            _logger = logger;
+            //_logger = logger;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -61,7 +61,7 @@ namespace Forum.Controllers
         {
             if (!await _authenticationManager.ValidateUser(user))
             {
-                _logger.LogWarn($"{nameof(Authenticate)}: Authentication failed. Wrong user name or password.");
+                //_logger.LogWarn($"{nameof(Authenticate)}: Authentication failed. Wrong user name or password.");
                 return Unauthorized();
             }
 

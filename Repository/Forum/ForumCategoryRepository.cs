@@ -6,6 +6,7 @@ using Entities.RequestFeatures.Forum;
 using Entities.RequestFeatures;
 using System.ComponentModel.Design;
 using Repository.Extensions;
+using Interfaces.Forum.API;
 
 namespace Repository.Forum
 {

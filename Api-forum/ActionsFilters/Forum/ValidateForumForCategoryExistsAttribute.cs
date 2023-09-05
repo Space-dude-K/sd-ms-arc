@@ -7,11 +7,11 @@ namespace api_forum.ActionsFilters.Forum
     public class ValidateForumForCategoryExistsAttribute : IAsyncActionFilter
     {
         private readonly IRepositoryManager _repository;
-        private readonly ILoggerManager _logger;
-        public ValidateForumForCategoryExistsAttribute(IRepositoryManager repository, ILoggerManager logger)
+        //private readonly ILoggerManager _logger;
+        public ValidateForumForCategoryExistsAttribute(IRepositoryManager repository)
         {
             _repository = repository;
-            _logger = logger;
+            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -21,7 +21,7 @@ namespace api_forum.ActionsFilters.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(categoryId, false);
             if (category == null)
             {
-                _logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
+                //_logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
 
                 context.Result = new NotFoundResult();
                 return;
@@ -30,7 +30,7 @@ namespace api_forum.ActionsFilters.Forum
             var forum = await _repository.ForumBase.GetForumFromCategoryAsync(categoryId, forumId, trackChanges);
             if (forum == null)
             {
-                _logger.LogInfo($"Forum with id: {forumId} doesn't exist in the database.");
+                //_logger.LogInfo($"Forum with id: {forumId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

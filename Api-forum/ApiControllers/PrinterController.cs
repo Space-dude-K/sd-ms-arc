@@ -1,6 +1,7 @@
 ﻿using Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 
 namespace Forum.Controllers
 {
@@ -9,17 +10,17 @@ namespace Forum.Controllers
     public class PrinterController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
-        private readonly ILoggerManager _logger;
+        //private readonly ILoggerManager _logger;
         public PrinterController(IRepositoryManager repository, ILoggerManager logger)
         {
             _repository = repository;
-            _logger = logger;
+            //_logger = logger;
         }
         [HttpGet]
         public IActionResult GetForums()
         {
-            var printerDevices = _repository.PrinterDevice.GetAllPrinterDevices(trackChanges: false);
-            return Ok(printerDevices);
+            //var printerDevices = _repository.PrinterDevice.GetAllPrinterDevices(trackChanges: false);
+            return Ok();
         }
     }
 }

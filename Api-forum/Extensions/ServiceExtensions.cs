@@ -1,7 +1,6 @@
 ﻿using Interfaces;
 using Entities;
 using Entities.Models;
-using LoggerService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +12,9 @@ using AspNetCoreRateLimit;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Net.Http.Headers;
-using Microsoft.OpenApi.Models;
+
 using System.Reflection;
-using Forum.ActionsFilters.Forum;
+
 using Entities.DTO.ForumDto;
 using Entities.DTO.UserDto;
 using Repository.DataShaping;
@@ -25,6 +24,7 @@ using api_forum.ActionsFilters.File;
 using api_forum.ActionsFilters.Forum;
 using api_forum.ActionsFilters.User;
 using api_forum.ActionsFilters;
+using Microsoft.OpenApi.Models;
 
 namespace Forum.Extensions
 {
@@ -46,7 +46,7 @@ namespace Forum.Extensions
         }
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
-            services.AddScoped<ILoggerManager, LoggerManager>();
+            //services.AddScoped<ILoggerManager, LoggerManager>();
         }
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         {

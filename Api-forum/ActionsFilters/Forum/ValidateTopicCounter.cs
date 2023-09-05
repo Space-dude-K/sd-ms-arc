@@ -8,11 +8,11 @@ namespace api_forum.ActionsFilters.Forum
     public class ValidateTopicCounter : IAsyncActionFilter
     {
         private readonly IRepositoryManager _repository;
-        private readonly ILoggerManager _logger;
+        //private readonly ILoggerManager _logger;
         public ValidateTopicCounter(IRepositoryManager repository, ILoggerManager logger)
         {
             _repository = repository;
-            _logger = logger;
+            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -23,7 +23,7 @@ namespace api_forum.ActionsFilters.Forum
 
             if (topicCounter == null)
             {
-                //_logger.LogInfo($"Topic counter with id: {topicId} doesn't exist in the database.");
+                ////_logger.LogInfo($"Topic counter with id: {topicId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

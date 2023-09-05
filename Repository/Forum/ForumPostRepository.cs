@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Entities.RequestFeatures.Forum;
 using Entities.RequestFeatures;
 using Repository.Extensions;
+using Interfaces.Forum.API;
+using Entities.DTO.ForumDto.Create;
+using Entities.DTO.ForumDto.Update;
 
 namespace Repository.Forum
 {

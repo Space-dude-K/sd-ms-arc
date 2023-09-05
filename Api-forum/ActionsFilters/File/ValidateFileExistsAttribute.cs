@@ -7,11 +7,10 @@ namespace api_forum.ActionsFilters.File
     public class ValidateFileExistsAttribute : IAsyncActionFilter
     {
         private readonly IRepositoryManager _repository;
-        private readonly ILoggerManager _logger;
-        public ValidateFileExistsAttribute(IRepositoryManager repository, ILoggerManager logger)
+
+        public ValidateFileExistsAttribute(IRepositoryManager repository)
         {
             _repository = repository;
-            _logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -22,7 +21,7 @@ namespace api_forum.ActionsFilters.File
 
             if (file == null)
             {
-                _logger.LogInfo($"File with user id: {forumUserId} doesn't exist in the database.");
+                //_logger.LogInfo($"File with user id: {forumUserId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
 
                 return;

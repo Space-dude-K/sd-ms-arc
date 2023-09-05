@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Identity;
 using Entities.DTO.UserDto;
 using Entities.DTO.UserDto.Create;
 using Entities.Models;
+using Repository;
 
 namespace api_forum.ActionsFilters.User
 {
     public class ValidateRoleExistsAttribute : IAsyncActionFilter
     {
         private readonly RoleManager<AppRole> _roleManager;
-        private readonly ILoggerManager _logger;
+        //private readonly ILoggerManager _logger;
         public ValidateRoleExistsAttribute(RoleManager<AppRole> roleManager, ILoggerManager logger)
         {
             _roleManager = roleManager;
-            _logger = logger;
+            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {

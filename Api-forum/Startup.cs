@@ -5,11 +5,11 @@ using Forum.Extensions;
 using Forum.Utility.ForumLinks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
-using Services;
-using Forum.Utility.UserLinks;
-using Services.Forum;
+
+
 using Microsoft.AspNetCore.Http.Features;
+using Repository;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Forum
 {
@@ -20,7 +20,7 @@ namespace Forum
 
         public Startup(IConfiguration configuration)
         {
-            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+            //LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
 
             appUrl = configuration?["ASPNETCORE_URLS"]?.Split(";").First() ?? string.Empty;
@@ -77,13 +77,13 @@ namespace Forum
 
             services.ConfigureDataShapers();
 
-            services.AddHttpClient<IAuthenticationService, AuthenticationService>(c =>
-                c.BaseAddress = new Uri(appUrl));
-            services.AddHttpClient<IHttpForumService, HttpForumService>(c =>
-                c.BaseAddress = new Uri(appUrl));
+            /*services.AddHttpClient<IAuthenticationService, AuthenticationService>(c =>
+                c.BaseAddress = new Uri(appUrl));*/
+            /*services.AddHttpClient<IHttpForumService, HttpForumService>(c =>
+                c.BaseAddress = new Uri(appUrl));*/
 
 
-            services.AddScoped<IForumModelService, ForumModelService>();
+            //services.AddScoped<IForumModelService, ForumModelService>();
             services.AddCustomMediaTypes();
 
             // HATEOAS
@@ -166,11 +166,11 @@ namespace Forum
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(s =>
+           /* app.UseSwaggerUI(s =>
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "Forum API v1");
                 s.SwaggerEndpoint("/swagger/v2/swagger.json", "Forum API v2");
-            });
+            });*/
 
         }
     }

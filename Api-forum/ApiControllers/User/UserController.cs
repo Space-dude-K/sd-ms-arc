@@ -12,6 +12,7 @@ using Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Repository;
 
 namespace Forum.ApiControllers.User
 {
@@ -19,14 +20,14 @@ namespace Forum.ApiControllers.User
     public class UserController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
-        private readonly ILoggerManager _logger;
+        //private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
         private readonly UserDataLinks _userDataLinks;
 
         public UserController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, UserDataLinks userDataLinks)
         {
             _repository = repository;
-            _logger = logger;
+            //_logger = logger;
             _mapper = mapper;
             _userDataLinks = userDataLinks;
         }
@@ -103,7 +104,7 @@ namespace Forum.ApiControllers.User
         {
             if (userDoc == null)
             {
-                _logger.LogError("patchDoc object sent from client is null.");
+                //_logger.LogError("patchDoc object sent from client is null.");
                 return BadRequest("patchDoc object is null");
             }
 
@@ -115,7 +116,7 @@ namespace Forum.ApiControllers.User
 
             if (!ModelState.IsValid)
             {
-                _logger.LogError("Invalid model state for the patch document");
+                //_logger.LogError("Invalid model state for the patch document");
                 return UnprocessableEntity(ModelState);
             }
 

@@ -2,8 +2,12 @@
 using Interfaces;
 using Repository.API.Forum;
 using Interfaces.Forum.API;
-using Repository.API.File;
 using Entities;
+using Repository.Forum;
+using Repository.User;
+using Interfaces.File;
+using Interfaces.User;
+using Repository.File;
 
 namespace Repository
 {
@@ -12,77 +16,109 @@ namespace Repository
         private readonly ILoggerManager _logger;
         private readonly ForumContext _forumContext;
 
-        private IForumCategoryRepository _category;
-        private IForumBaseRepository _forum;
-        private IForumTopicRepository _topic;
-        private IForumPostRepository _post;
+        private IRoleRepository _roleRepository;
+        private UserDataRepository _userDataRepository;
+        private ForumUserDataRepository _forumUserDataRepository;
 
-        private IForumFileRepository _file;
+        private IForumCategoryRepository _forumCategoryRepository;
+        private IForumBaseRepository _forumBaseRepository;
+        private IForumTopicRepository _forumTopicRepository;
+        private IForumTopicCounterRepository _forumTopicCounterRepository;
+        private IForumPostRepository _forumPostRepository;
+
+        private IForumFileRepository _forumFileRepository;
 
         private IForumUserRepository _forumUser;
 
-        public RepositoryManager(ILoggerManager logger, ForumContext forumContext)
+        public RepositoryManager(ForumContext forumContext)
         {
-            _logger = logger;
+            _forumContext = forumContext;
         }
+        public IRoleRepository Roles
+        {
+            get
+            {
+                if (_roleRepository == null)
+                    _roleRepository = new RoleRepository(_forumContext);
+
+                return _roleRepository;
+            }
+        }
+        public IForumUserDataRepository ForumUsers
+        {
+            get
+            {
+                if (_forumUserDataRepository == null)
+                    _forumUserDataRepository = new ForumUserDataRepository(_forumContext);
+
+                return _forumUserDataRepository;
+            }
+        }
+        public IUserDataRepository Users
+        {
+            get
+            {
+                if (_userDataRepository == null)
+                    _userDataRepository = new UserDataRepository(_forumContext);
+
+                return _userDataRepository;
+            }
+        }
+
         public IForumCategoryRepository ForumCategory
         {
             get
             {
-                if (_category == null)
-                    _category = new ForumCategoryRepository(_logger, _forumContext);
-
-                return _category;
+                if (_forumCategoryRepository == null)
+                    _forumCategoryRepository = new ForumCategoryRepository(_forumContext);
+                return _forumCategoryRepository;
             }
         }
+
         public IForumBaseRepository ForumBase
         {
             get
             {
-                if (_forum == null)
-                    _forum = new ForumBaseRepository(_logger, _forumContext);
-
-                return _forum;
+                if (_forumBaseRepository == null)
+                    _forumBaseRepository = new ForumBaseRepository(_forumContext);
+                return _forumBaseRepository;
             }
         }
+        //
         public IForumTopicRepository ForumTopic
         {
             get
             {
-                if (_topic == null)
-                    _topic = new ForumTopicRepository(_logger, _forumContext);
-
-                return _topic;
+                if (_forumTopicRepository == null)
+                    _forumTopicRepository = new ForumTopicRepository(_forumContext);
+                return _forumTopicRepository;
+            }
+        }
+        public IForumTopicCounterRepository ForumTopicCounter
+        {
+            get
+            {
+                if (_forumTopicCounterRepository == null)
+                    _forumTopicCounterRepository = new ForumTopicCounterRepository(_forumContext);
+                return _forumTopicCounterRepository;
             }
         }
         public IForumPostRepository ForumPost
         {
             get
             {
-                if (_post == null)
-                    _post = new ForumPostRepository(_logger, _forumContext);
-
-                return _post;
+                if (_forumPostRepository == null)
+                    _forumPostRepository = new ForumPostRepository(_forumContext);
+                return _forumPostRepository;
             }
         }
         public IForumFileRepository ForumFile
         {
             get
             {
-                if (_file == null)
-                    _file = new ForumFileRepository(_logger, _forumContext);
-
-                return _file;
-            }
-        }
-        public IForumUserRepository ForumUser
-        {
-            get
-            {
-                if (_forumUser == null)
-                    _forumUser = new ForumUserRepository(_logger, _forumContext);
-
-                return _forumUser;
+                if (_forumFileRepository == null)
+                    _forumFileRepository = new ForumFileRepository(_forumContext);
+                return _forumFileRepository;
             }
         }
         public Task SaveAsync()
