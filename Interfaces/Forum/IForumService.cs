@@ -1,8 +1,5 @@
 ﻿using Entities.DTO.FileDto;
-using Entities.DTO.ForumDto.Create;
-using Entities.DTO.ForumDto.ForumView;
 using Entities.DTO.UserDto;
-using Entities.ViewModels.Forum;
 
 namespace Interfaces.Forum
 {
