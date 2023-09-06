@@ -3,4 +3,5 @@
 - Логирование с помощью ELK + NLog
 - HealthChecks + Watchdog для микросервисов
 - API-шлюз Ocelot
-- API-микросервисы с MSSQLServer, PostgreSQL, MongoDB, Redis бд для разных проектов + брокер сообщений RabbitMQ + MassTransit
+- API-микросервисы с MSSQLServer (forum-g), PostgreSQL (free-space-checker), MongoDB (check-up-money), Redis (zp) бд для разных проектов
+- Брокер сообщений RabbitMQ + MassTransit
