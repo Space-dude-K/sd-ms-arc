@@ -2,7 +2,7 @@
 В планах для первого этапа:
 - Создание необходимой Docker-инфраструктуры
 - Логирование с помощью ELK + NLog
-- HealthChecks + Watchdog для микросервисов
 - API-шлюз Ocelot
-- API-микросервисы с MSSQLServer (forum-g), PostgreSQL (free-space-checker), MongoDB (check-up-money), Redis (zp) бд для разных проектов
 - Брокер сообщений RabbitMQ + MassTransit
+- API-микросервисы с MSSQLServer (forum-g), PostgreSQL (free-space-checker), MongoDB (check-up-money), Redis (zp) бд для разных проектов
+- HealthChecks + Watchdog для микросервисов
