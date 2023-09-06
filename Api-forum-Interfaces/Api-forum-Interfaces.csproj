@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\entities\Entities.csproj" />
+    <ProjectReference Include="..\Api-forum-Entities\Api-forum-Entities.csproj" />
   </ItemGroup>
 
 </Project>

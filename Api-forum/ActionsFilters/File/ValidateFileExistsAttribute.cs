@@ -1,6 +1,6 @@
-﻿using Interfaces;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
+using Interfaces;
 
 namespace api_forum.ActionsFilters.File
 {
