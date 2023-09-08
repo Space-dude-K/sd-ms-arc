@@ -7,4 +7,11 @@
     <RootNamespace>api_gw_ocelot</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Ocelot" Version="19.0.2" />
+    <PackageReference Include="Ocelot.Cache.CacheManager" Version="19.0.2" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties ocelot_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
+
 </Project>
