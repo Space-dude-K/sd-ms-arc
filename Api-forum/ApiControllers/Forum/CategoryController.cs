@@ -91,7 +91,7 @@ namespace Forum.Controllers.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(categoryId, trackChanges: false);
             if (category == null)
             {
-                //_logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
+                //_logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
                 return NotFound();
             }
             else
@@ -265,7 +265,7 @@ namespace Forum.Controllers.Forum
 
             _mapper.Map(categoryToPatch, categoryEntity);
 
-            //_logger.LogInfo($"Part up {categoryToPatch.Name}");
+            //_logger.LogInformation($"Part up {categoryToPatch.Name}");
 
             await _repository.SaveAsync();
 

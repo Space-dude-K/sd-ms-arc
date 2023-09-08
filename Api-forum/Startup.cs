@@ -1,15 +1,9 @@
 ﻿using AspNetCoreRateLimit;
 using Interfaces;
-using Interfaces.Forum;
 using Forum.Extensions;
-using Forum.Utility.ForumLinks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-
-
-using Microsoft.AspNetCore.Http.Features;
 using Repository;
-using Microsoft.AspNetCore.Authentication;
 
 namespace Forum
 {
@@ -20,31 +14,17 @@ namespace Forum
 
         public Startup(IConfiguration configuration)
         {
-            //LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
 
             appUrl = configuration?["ASPNETCORE_URLS"]?.Split(";").First() ?? string.Empty;
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging();
+
             services.ConfigureCors();
 
             services.ConfigureIISIntegration();
-            /*services.Configure<IISServerOptions>(options =>
-            {
-                options.MaxRequestBodySize = int.MaxValue;
-            });
-            services.Configure<FormOptions>(o =>
-            {
-                o.ValueLengthLimit = int.MaxValue;
-                o.MultipartBodyLengthLimit = int.MaxValue;
-                o.MultipartBoundaryLengthLimit = int.MaxValue;
-                o.MultipartHeadersCountLimit = int.MaxValue;
-                o.MultipartHeadersLengthLimit = int.MaxValue;
-                o.BufferBodyLengthLimit = int.MaxValue;
-                o.BufferBody = true;
-                o.ValueCountLimit = int.MaxValue;
-            });*/
 
             services.ConfigureLoggerService();
             services.ConfigureSqlContext(Configuration);

@@ -57,7 +57,7 @@ namespace Forum.ApiControllers.File
 
             if (file == null)
             {
-                //_logger.LogInfo($"File with user id: {forumUserId} doesn't exist in the database.");
+                //_logger.LogInformation($"File with user id: {forumUserId} doesn't exist in the database.");
                 return NotFound();
             }
 
@@ -87,7 +87,7 @@ namespace Forum.ApiControllers.File
 
             /*if (file == null)
             {
-                //_logger.LogInfo($"File with user id: {forumUserId} doesn't exist in the database.");
+                //_logger.LogInformation($"File with user id: {forumUserId} doesn't exist in the database.");
                 return NotFound();
             }*/
 

@@ -21,7 +21,7 @@ namespace api_forum.ActionsFilters.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(categoryId, false);
             if (category == null)
             {
-                //_logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
+                //_logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
 
                 context.Result = new NotFoundResult();
                 return;
@@ -30,7 +30,7 @@ namespace api_forum.ActionsFilters.Forum
             var forum = await _repository.ForumBase.GetForumFromCategoryAsync(categoryId, forumId, trackChanges);
             if (forum == null)
             {
-                //_logger.LogInfo($"Forum with id: {forumId} doesn't exist in the database.");
+                //_logger.LogInformation($"Forum with id: {forumId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

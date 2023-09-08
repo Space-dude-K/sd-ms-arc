@@ -20,7 +20,7 @@ namespace api_forum.ActionsFilters.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(id, trackChanges);
             if (category == null)
             {
-                //_logger.LogInfo($"Category with id: {id} doesn't exist in the database.");
+                //_logger.LogInformation($"Category with id: {id} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

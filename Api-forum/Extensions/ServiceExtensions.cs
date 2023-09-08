@@ -76,14 +76,6 @@ namespace Forum.Extensions
             services.AddScoped<ValidateFileExistsAttribute>();
             services.AddScoped<ValidateAppUserExistsAttribute>();
             services.AddScoped<ValidateMediaTypeAttribute>();
-
-            /*services.AddScoped<ValidateAuthenticationAttribute>();
-            services.AddScoped<ValidateForumUserExistAttribute>();
-            services.AddScoped<ValidateAppUserExistAttribute>();
-
-            services.AddScoped<ValidateUserLoginAttribute>();
-            services.AddScoped<ValidateUserRolesExistAttribute>();
-            services.AddScoped<ValidateUserRegisteredAttribute>();*/
         }
         public static void AddCustomMediaTypes(this IServiceCollection services)
         {
