@@ -10,9 +10,12 @@ namespace Forum.Controllers
     public class RootController : ControllerBase
     {
         private readonly LinkGenerator _linkGenerator;
-        public RootController(LinkGenerator linkGenerator)
+        private readonly ILogger<RootController> _logger;
+
+        public RootController(LinkGenerator linkGenerator, ILogger<RootController> logger)
         {
             _linkGenerator = linkGenerator;
+            _logger = logger;
         }
         [HttpGet(Name = "GetRoot")]
         public IActionResult GetRoot([FromHeader(Name = "Accept")] string mediaType)
@@ -45,6 +48,18 @@ namespace Forum.Controllers
             }
 
             return NoContent();
+        }
+        [HttpGet(Name = "Test")]
+        public IActionResult Get()
+        {
+            _logger.LogDebug("Debug message");
+            _logger.LogTrace("Trace message");
+            _logger.LogError("Error message");
+            _logger.LogWarning("Warning message");
+            _logger.LogCritical("Critical message");
+            _logger.LogInformation("Information message");
+
+            return Ok();
         }
     }
 }

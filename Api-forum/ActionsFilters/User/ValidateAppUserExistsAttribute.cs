@@ -22,7 +22,7 @@ namespace api_forum.ActionsFilters.User
 
             if (user == null)
             {
-                //_logger.LogInfo($"App user with id: {userId} doesn't exist in the database.");
+                //_logger.LogInformation($"App user with id: {userId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

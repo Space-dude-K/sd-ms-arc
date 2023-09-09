@@ -6,13 +6,15 @@ namespace api_forum.ActionsFilters.File
 {
     public class ValidateFileExistsAttribute : IAsyncActionFilter
     {
+        private readonly ILogger<ValidateFileExistsAttribute> _logger;
         private readonly IRepositoryManager _repository;
 
-        public ValidateFileExistsAttribute(IRepositoryManager repository)
+        public ValidateFileExistsAttribute(ILogger<ValidateFileExistsAttribute> logger, IRepositoryManager repository)
         {
+            _logger = logger;
             _repository = repository;
         }
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        public async Task OnActionExecutionAsync( ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var method = context.HttpContext.Request.Method;
             var trackChanges = method.Equals("PUT") || method.Equals("PATCH") ? true : false;
@@ -21,7 +23,7 @@ namespace api_forum.ActionsFilters.File
 
             if (file == null)
             {
-                //_logger.LogInfo($"File with user id: {forumUserId} doesn't exist in the database.");
+                _logger.LogInformation($"File with user id: {forumUserId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
 
                 return;

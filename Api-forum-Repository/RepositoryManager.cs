@@ -8,12 +8,13 @@ using Repository.User;
 using Interfaces.File;
 using Interfaces.User;
 using Repository.File;
+using Microsoft.Extensions.Logging;
 
 namespace Repository
 {
     public class RepositoryManager : IRepositoryManager
     {
-        private readonly ILoggerManager _logger;
+        private readonly ILogger<RepositoryManager> _logger;
         private readonly ForumContext _forumContext;
 
         private IRoleRepository _roleRepository;
@@ -30,8 +31,9 @@ namespace Repository
 
         private IForumUserRepository _forumUser;
 
-        public RepositoryManager(ForumContext forumContext)
+        public RepositoryManager(ILogger<RepositoryManager> logger, ForumContext forumContext)
         {
+            _logger = logger;
             _forumContext = forumContext;
         }
         public IRoleRepository Roles

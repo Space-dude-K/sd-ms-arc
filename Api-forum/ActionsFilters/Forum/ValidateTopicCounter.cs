@@ -1,18 +1,18 @@
 ﻿using Interfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 
 namespace api_forum.ActionsFilters.Forum
 {
     public class ValidateTopicCounter : IAsyncActionFilter
     {
+        private readonly ILogger<ValidateTopicCounter> _logger;
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
-        public ValidateTopicCounter(IRepositoryManager repository, ILoggerManager logger)
+
+        public ValidateTopicCounter(ILogger<ValidateTopicCounter> logger, IRepositoryManager repository)
         {
+            _logger = logger;
             _repository = repository;
-            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -23,7 +23,7 @@ namespace api_forum.ActionsFilters.Forum
 
             if (topicCounter == null)
             {
-                ////_logger.LogInfo($"Topic counter with id: {topicId} doesn't exist in the database.");
+                _logger.LogInformation($"Topic counter with id: {topicId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

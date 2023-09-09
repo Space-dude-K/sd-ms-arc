@@ -6,12 +6,13 @@ namespace api_forum.ActionsFilters.Forum
 {
     public class ValidatePostForTopicExistsAttribute : IAsyncActionFilter
     {
+        private readonly ILogger<ValidatePostForTopicExistsAttribute> _logger;
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
-        public ValidatePostForTopicExistsAttribute(IRepositoryManager repository)
+        public ValidatePostForTopicExistsAttribute(ILogger<ValidatePostForTopicExistsAttribute> logger, 
+            IRepositoryManager repository)
         {
+            _logger = logger;
             _repository = repository;
-            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -23,7 +24,7 @@ namespace api_forum.ActionsFilters.Forum
 
             if (topic == null)
             {
-                //_logger.LogInfo($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                _logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
 
                 return;
@@ -34,7 +35,7 @@ namespace api_forum.ActionsFilters.Forum
 
             if (post == null)
             {
-                //_logger.LogInfo($"Post with id: {postId} doesn't exist in the database.");
+                _logger.LogInformation($"Post with id: {postId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

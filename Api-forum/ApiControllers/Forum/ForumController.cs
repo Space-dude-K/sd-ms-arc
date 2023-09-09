@@ -67,7 +67,7 @@ namespace Forum.Controllers.Forum
 
             if (category == null)
             {
-                //_logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
+                //_logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
                 return NotFound();
             }
 
@@ -101,13 +101,13 @@ namespace Forum.Controllers.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(categoryId, trackChanges: false);
             if (category == null)
             {
-                //_logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
+                //_logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
                 return NotFound();
             }
             var forumDb = await _repository.ForumBase.GetForumFromCategoryAsync(categoryId, forumId, trackChanges: false);
             if (forumDb == null)
             {
-                //_logger.LogInfo($"Forum with id: {forumId} doesn't exist in the database.");
+                //_logger.LogInformation($"Forum with id: {forumId} doesn't exist in the database.");
                 return NotFound();
             }
             var forumDto = _mapper.Map<ForumBaseDto>(forumDb);
@@ -181,7 +181,7 @@ namespace Forum.Controllers.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(categoryId, trackChanges: false);
             if (category == null)
             {
-                //_logger.LogInfo($"Category with id: {categoryId} doesn't exist in the database.");
+                //_logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
                 return NotFound();
             }
 

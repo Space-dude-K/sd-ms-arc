@@ -71,7 +71,7 @@ namespace Forum.Controllers.Forum
 
             if (topic == null)
             {
-                //_logger.LogInfo($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                //_logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -106,7 +106,7 @@ namespace Forum.Controllers.Forum
 
             if (topic == null)
             {
-                //_logger.LogInfo($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                //_logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -146,14 +146,14 @@ namespace Forum.Controllers.Forum
             var topicDb = await _repository.ForumTopic.GetTopicAsync(forumId, topicId, trackChanges: false);
             if (topicDb == null)
             {
-                //_logger.LogInfo($"Topic with forum id: {forumId} and post id: {postId} doesn't exist in the database.");
+                //_logger.LogInformation($"Topic with forum id: {forumId} and post id: {postId} doesn't exist in the database.");
 
                 return NotFound();
             }
             var postDb = await _repository.ForumPost.GetPostAsync(topicId, postId, trackChanges: false);
             if (postDb == null)
             {
-                //_logger.LogInfo($"Post with id: {postId} doesn't exist in the database.");
+                //_logger.LogInformation($"Post with id: {postId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -231,7 +231,7 @@ namespace Forum.Controllers.Forum
             var topic = await _repository.ForumTopic.GetTopicAsync(forumId, topicId, trackChanges: false);
             if (topic == null)
             {
-                //_logger.LogInfo($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                //_logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
 
                 return NotFound();
             }
