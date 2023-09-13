@@ -3,11 +3,34 @@ filebeat.config:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
 
-processors:
-  - add_cloud_metadata: ~
-  - add_docker_metadata: ~
 
-output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
+
+
+
+
+
+
+
+
+#processors:
+#  - add_cloud_metadata: ~
+#  - add_docker_metadata: ~
+
+# parsing example
+#processors:
+#  - decode_json_fields:
+#      fields: ["something"]
+#      process_array: true
+#      overwrite_keys: true
+#      add_error_key: true
+
+filebeat.inputs:
+- input_type: log
+  enabled: true
+  paths:
+    - /var/log/sd-ms-arc-log/applog-asd.log
+
+output.logstash:
+  hosts: ["logstash:5044"]
+#output.console:
+#  pretty: true

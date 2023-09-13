@@ -62,7 +62,7 @@ services:
       - elkf-sd-ms-arc
     mem_limit: 1g
     volumes:
-      - ./configs/filebeat/filebeat.yml:/usr/share/filebeat.yml
+      - ./configs/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./logs:/var/log/sd-ms-arc-log
     #configs:
     #  - source: fb_config
