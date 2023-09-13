@@ -15,7 +15,6 @@ namespace Forum
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
             appUrl = configuration?["ASPNETCORE_URLS"]?.Split(";").First() ?? string.Empty;
         }
         public void ConfigureServices(IServiceCollection services)
@@ -96,7 +95,7 @@ namespace Forum
 
             services.ConfigureSwagger();
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -110,6 +109,9 @@ namespace Forum
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            //var logger = app.ApplicationServices.GetService<ILogger>();
+            ILogger<Startup> logger = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
+            logger.LogInformation("Test");
             app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
             // enables using static files for the request. If we don’t set a path to the static files directory, it will use a wwwroot

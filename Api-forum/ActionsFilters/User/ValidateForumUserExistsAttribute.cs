@@ -6,12 +6,12 @@ namespace api_forum.ActionsFilters.User
 {
     public class ValidateForumUserExistsAttribute : IAsyncActionFilter
     {
+        private readonly ILogger<ValidateForumUserExistsAttribute> _logger;
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
-        public ValidateForumUserExistsAttribute(IRepositoryManager repository)
+        public ValidateForumUserExistsAttribute(ILogger<ValidateForumUserExistsAttribute> logger, IRepositoryManager repository)
         {
+            _logger = logger;
             _repository = repository;
-            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -22,7 +22,7 @@ namespace api_forum.ActionsFilters.User
 
             if (user == null)
             {
-                //_logger.LogInformation($"Forum user with id: {userId} doesn't exist in the database.");
+                _logger.LogError($"Forum user with id: {userId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

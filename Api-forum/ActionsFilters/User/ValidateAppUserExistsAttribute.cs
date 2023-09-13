@@ -6,12 +6,14 @@ namespace api_forum.ActionsFilters.User
 {
     public class ValidateAppUserExistsAttribute : IAsyncActionFilter
     {
+        private readonly ILogger<ValidateAppUserExistsAttribute> _logger;
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
-        public ValidateAppUserExistsAttribute(IRepositoryManager repository)
+
+        public ValidateAppUserExistsAttribute(ILogger<ValidateAppUserExistsAttribute> logger, 
+            IRepositoryManager repository)
         {
+            _logger = logger;
             _repository = repository;
-            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -22,7 +24,7 @@ namespace api_forum.ActionsFilters.User
 
             if (user == null)
             {
-                //_logger.LogInformation($"App user with id: {userId} doesn't exist in the database.");
+                _logger.LogError($"App user with id: {userId} doesn't exist in the database.");
                 context.Result = new NotFoundResult();
             }
             else

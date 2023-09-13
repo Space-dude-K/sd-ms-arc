@@ -1,22 +1,19 @@
-﻿using Interfaces;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using Entities.DTO.UserDto;
 using Entities.DTO.UserDto.Create;
 using Entities.Models;
-using Repository;
 
 namespace api_forum.ActionsFilters.User
 {
     public class ValidateRoleExistsAttribute : IAsyncActionFilter
     {
+        private readonly ILogger<ValidateRoleExistsAttribute> _logger;
         private readonly RoleManager<AppRole> _roleManager;
-        //private readonly ILoggerManager _logger;
-        public ValidateRoleExistsAttribute(RoleManager<AppRole> roleManager, ILoggerManager logger)
+        public ValidateRoleExistsAttribute(ILogger<ValidateRoleExistsAttribute> logger, RoleManager<AppRole> roleManager)
         {
+            _logger = logger;
             _roleManager = roleManager;
-            //_logger = logger;
         }
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -32,6 +29,7 @@ namespace api_forum.ActionsFilters.User
 
                     if (!isRoleExist)
                     {
+                        _logger.LogError($"User role {role} does not exist in database");
                         context.Result = new BadRequestObjectResult($"User role {role} does not exist in database");
                         return;
                     }

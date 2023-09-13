@@ -15,12 +15,20 @@ namespace api_forum.Controllers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            //_logger = logger;
+            _logger = logger;
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogDebug("Debug message");
+            _logger.LogTrace("Trace message");
+            _logger.LogError("Error message");
+            _logger.LogWarning("Warning message");
+            _logger.LogCritical("Critical message");
+            _logger.LogInformation("Information message");
+
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
