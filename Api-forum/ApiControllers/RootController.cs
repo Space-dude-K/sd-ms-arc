@@ -49,17 +49,5 @@ namespace Forum.Controllers
 
             return NoContent();
         }
-        [HttpGet(Name = "Test")]
-        public IActionResult Get()
-        {
-            _logger.LogDebug("Debug message");
-            _logger.LogTrace("Trace message");
-            _logger.LogError("Error message");
-            _logger.LogWarning("Warning message");
-            _logger.LogCritical("Critical message");
-            _logger.LogInformation("Information message");
-
-            return Ok();
-        }
     }
 }

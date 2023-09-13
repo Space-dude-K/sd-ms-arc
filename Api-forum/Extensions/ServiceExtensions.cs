@@ -322,7 +322,7 @@ namespace Forum.Extensions
                     Version = "v2"
                 });
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                /*var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 s.IncludeXmlComments(xmlPath);
 
@@ -348,7 +348,7 @@ namespace Forum.Extensions
                     },
                     new List<string>()
                     }
-                });
+                });*/
             });
         }
         public static void ConfigureDataShapers(this IServiceCollection services)
