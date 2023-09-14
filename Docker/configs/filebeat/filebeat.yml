@@ -28,7 +28,7 @@ filebeat.inputs:
 - input_type: log
   enabled: true
   paths:
-    - /var/log/sd-ms-arc-log/applog-asd.log
+    - /var/log/sd-ms-arc-log/sd-ms-arc-info.log
   scan_frequency: 10s
 
 output.logstash:
