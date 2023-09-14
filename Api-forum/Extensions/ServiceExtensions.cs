@@ -12,9 +12,6 @@ using AspNetCoreRateLimit;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Net.Http.Headers;
-
-using System.Reflection;
-
 using Entities.DTO.ForumDto;
 using Entities.DTO.UserDto;
 using Repository.DataShaping;

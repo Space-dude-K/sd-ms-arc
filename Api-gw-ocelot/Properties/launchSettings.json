@@ -1,39 +1,45 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
+  "iisSettings":
+  {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
-    "iisExpress": {
+    "iisExpress":
+    {
       "applicationUrl": "http://localhost:42911",
       "sslPort": 44368
     }
   },
-  "profiles": {
-    "http": {
+  "profiles":
+  {
+    "http":
+    {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "applicationUrl": "http://localhost:5267",
-      "environmentVariables": {
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables":
+      {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "https":
+    {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "applicationUrl": "https://localhost:7194;http://localhost:5267",
-      "environmentVariables": {
+      "applicationUrl": "https://localhost:5000",
+      "environmentVariables":
+      {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "IIS Express": {
+    "IIS Express":
+    {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
-      "environmentVariables": {
+      "environmentVariables":
+      {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
