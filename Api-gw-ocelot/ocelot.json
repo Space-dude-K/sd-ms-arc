@@ -1,1 +1,73 @@
-﻿
+﻿{
+  "Routes":
+  [
+    {
+      "UpstreamPathTemplate": "/gw/categories",
+      "UpstreamHttpMethod":
+      [
+        "OPTIONS", "Get", "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}",
+      "UpstreamHttpMethod":
+      [
+        "Get", "Put", "Patch", "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/collection/({ids})",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/categories/collection/({ids})",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/collection",
+      "UpstreamHttpMethod":
+      [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/collection",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration":
+  {
+    "BaseUrl": "http://localhost:5000"
+  }
+}

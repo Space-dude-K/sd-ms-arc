@@ -11,7 +11,8 @@ namespace api_gw_ocelot
             return Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
+                    //config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
+                    config.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
                 })
                 //.UseSerilog(SeriLogger.Configure)
                 .ConfigureWebHostDefaults(webBuilder =>

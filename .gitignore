@@ -12,6 +12,7 @@
 
 # Docker files
 Docker/logs/*
+Docker/data/*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
