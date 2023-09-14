@@ -49,7 +49,7 @@ namespace Forum.Extensions
         {
             services.AddDbContext<ForumContext>(opts => 
                 opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"),
-                b => b.MigrationsAssembly("Forum")
+                b => b.MigrationsAssembly("Api-forum")
             ));
         }
         public static void ConfigureRepositoryManager(this IServiceCollection services)

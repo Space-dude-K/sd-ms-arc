@@ -109,9 +109,9 @@ namespace Forum
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //var logger = app.ApplicationServices.GetService<ILogger>();
+
             ILogger<Startup> logger = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
-            logger.LogInformation("Test");
+
             app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
             // enables using static files for the request. If we don’t set a path to the static files directory, it will use a wwwroot
