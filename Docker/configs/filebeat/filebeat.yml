@@ -29,8 +29,10 @@ filebeat.inputs:
   enabled: true
   paths:
     - /var/log/sd-ms-arc-log/applog-asd.log
+  scan_frequency: 10s
 
 output.logstash:
   hosts: ["logstash:5044"]
+  bulk_max_size: 0
 #output.console:
 #  pretty: true
