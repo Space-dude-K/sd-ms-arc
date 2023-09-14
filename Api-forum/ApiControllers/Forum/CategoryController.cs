@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using api_forum.ActionsFilters.Forum;
 using api_forum.ActionsFilters;
-using Repository;
 
 namespace Forum.Controllers.Forum
 {
@@ -24,15 +23,15 @@ namespace Forum.Controllers.Forum
     public class CategoryController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
+        private readonly ILogger<CategoryController> _logger;
         private readonly IMapper _mapper;
         private readonly CategoryLinks _categoryLinks;
 
         // TODO. Service layer for mappings and data shaping
-        public CategoryController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, CategoryLinks categoryLinks)
+        public CategoryController(IRepositoryManager repository, ILogger<CategoryController> logger, IMapper mapper, CategoryLinks categoryLinks)
         {
             _repository = repository;
-            //_logger = logger;
+            _logger = logger;
             _mapper = mapper;
             _categoryLinks = categoryLinks;
         }
@@ -91,7 +90,7 @@ namespace Forum.Controllers.Forum
             var category = await _repository.ForumCategory.GetCategoryAsync(categoryId, trackChanges: false);
             if (category == null)
             {
-                //_logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
+                _logger.LogInformation($"Category with id: {categoryId} doesn't exist in the database.");
                 return NotFound();
             }
             else
@@ -122,7 +121,7 @@ namespace Forum.Controllers.Forum
         {
             if (ids == null)
             {
-                //_logger.LogError("Parameter ids is null");
+                _logger.LogError("Parameter ids is null");
                 return BadRequest("Parameter ids is null");
             }
 
@@ -130,7 +129,7 @@ namespace Forum.Controllers.Forum
 
             if (ids.Count() != categoryEntities.Count())
             {
-                //_logger.LogError("Some ids are not valid in a collection");
+                _logger.LogError("Some ids are not valid in a collection");
                 return NotFound();
             }
 
@@ -158,7 +157,7 @@ namespace Forum.Controllers.Forum
 
             if (categoryEntity == null)
             {
-                //_logger.LogError("ForumCategory entity is null");
+                _logger.LogError("ForumCategory entity is null");
                 return BadRequest("ForumCategory entity is null");
             }
 
@@ -186,7 +185,7 @@ namespace Forum.Controllers.Forum
         {
             if (categoryCollection == null)
             {
-                //_logger.LogError("Category collection sent from client is null.");
+                _logger.LogError("Category collection sent from client is null.");
                 return BadRequest("Category collection is null");
             }
             var categoryEntities = _mapper.Map<IEnumerable<ForumCategory>>(categoryCollection);
@@ -219,7 +218,7 @@ namespace Forum.Controllers.Forum
 
             if (categoryEntity == null)
             {
-                //_logger.LogError("ForumCategory entity is null");
+                _logger.LogError("ForumCategory entity is null");
                 return BadRequest("ForumCategory entity is null");
             }
 
@@ -247,7 +246,7 @@ namespace Forum.Controllers.Forum
         {
             if (patchDoc == null)
             {
-                //_logger.LogError("patchDoc object sent from client is null.");
+                _logger.LogError("patchDoc object sent from client is null.");
                 return BadRequest("patchDoc object is null");
             }
             var categoryEntity = HttpContext.Items["category"] as ForumCategory;
@@ -259,13 +258,13 @@ namespace Forum.Controllers.Forum
 
             if (!ModelState.IsValid)
             {
-                //_logger.LogError("Invalid model state for the patch document");
+                _logger.LogError("Invalid model state for the patch document");
                 return UnprocessableEntity(ModelState);
             }
 
             _mapper.Map(categoryToPatch, categoryEntity);
 
-            //_logger.LogInformation($"Part up {categoryToPatch.Name}");
+            _logger.LogInformation($"Part up {categoryToPatch.Name}");
 
             await _repository.SaveAsync();
 
@@ -289,7 +288,7 @@ namespace Forum.Controllers.Forum
 
             if (category == null)
             {
-                //_logger.LogError("ForumCategory entity is null");
+                _logger.LogError("ForumCategory entity is null");
                 return BadRequest("ForumCategory entity is null");
             }
 

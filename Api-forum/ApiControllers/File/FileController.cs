@@ -7,13 +7,8 @@ using Entities.Models.File;
 using Entities.DTO.FileDto.Update;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Entities.DTO.ForumDto;
-using Entities.RequestFeatures.Forum;
-using Forum.Utility.ForumLinks;
-using Forum.ModelBinders;
 using api_forum.ActionsFilters.File;
 using api_forum.ActionsFilters;
-using Repository;
 
 namespace Forum.ApiControllers.File
 {
@@ -22,15 +17,15 @@ namespace Forum.ApiControllers.File
     public class FileController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
+        private readonly ILogger<FileController> _logger;
         private readonly IMapper _mapper;
         private readonly UserDataLinks _userDataLinks;
 
-        public FileController(IRepositoryManager repository, 
-            ILoggerManager logger, IMapper mapper, UserDataLinks userDataLinks)
+        public FileController(IRepositoryManager repository,
+            ILogger<FileController> logger, IMapper mapper, UserDataLinks userDataLinks)
         {
             _repository = repository;
-            //_logger = logger;
+            _logger = logger;
             _mapper = mapper;
             _userDataLinks = userDataLinks;
         }
@@ -57,7 +52,7 @@ namespace Forum.ApiControllers.File
 
             if (file == null)
             {
-                //_logger.LogInformation($"File with user id: {forumUserId} doesn't exist in the database.");
+                _logger.LogInformation($"File with user id: {forumUserId} doesn't exist in the database.");
                 return NotFound();
             }
 
@@ -108,7 +103,7 @@ namespace Forum.ApiControllers.File
         {
             if (!ModelState.IsValid)
             {
-                //_logger.LogError("Invalid model state for the ForumFileDto object");
+                _logger.LogError("Invalid model state for the ForumFileDto object");
                 return UnprocessableEntity(ModelState);
             }
 
@@ -135,7 +130,7 @@ namespace Forum.ApiControllers.File
         {
             if (!ModelState.IsValid)
             {
-                //_logger.LogError("Invalid model state for the ForumFileForUpdateDto object");
+                _logger.LogError("Invalid model state for the ForumFileForUpdateDto object");
                 return UnprocessableEntity(ModelState);
             }
 

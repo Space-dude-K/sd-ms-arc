@@ -22,15 +22,15 @@ namespace Forum.Controllers.Forum
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
     public class PostController : ControllerBase
     {
+        private readonly ILogger<PostController> _logger;
         private readonly IRepositoryManager _repository;
-        //private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
         private readonly PostLinks _postLinks;
 
-        public PostController(IRepositoryManager repository, IMapper mapper, PostLinks postLinks)
+        public PostController(ILogger<PostController> logger, IRepositoryManager repository, IMapper mapper, PostLinks postLinks)
         {
+            _logger = logger;
             _repository = repository;
-            //_logger = logger;
             _mapper = mapper;
             _postLinks = postLinks;
         }
@@ -71,7 +71,7 @@ namespace Forum.Controllers.Forum
 
             if (topic == null)
             {
-                //_logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                _logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -106,7 +106,7 @@ namespace Forum.Controllers.Forum
 
             if (topic == null)
             {
-                //_logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                _logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -146,14 +146,14 @@ namespace Forum.Controllers.Forum
             var topicDb = await _repository.ForumTopic.GetTopicAsync(forumId, topicId, trackChanges: false);
             if (topicDb == null)
             {
-                //_logger.LogInformation($"Topic with forum id: {forumId} and post id: {postId} doesn't exist in the database.");
+                _logger.LogInformation($"Topic with forum id: {forumId} and post id: {postId} doesn't exist in the database.");
 
                 return NotFound();
             }
             var postDb = await _repository.ForumPost.GetPostAsync(topicId, postId, trackChanges: false);
             if (postDb == null)
             {
-                //_logger.LogInformation($"Post with id: {postId} doesn't exist in the database.");
+                _logger.LogInformation($"Post with id: {postId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -188,7 +188,7 @@ namespace Forum.Controllers.Forum
         {
             if (ids == null)
             {
-                //_logger.LogError("Parameter ids is null");
+                _logger.LogError("Parameter ids is null");
                 return BadRequest("Parameter ids is null");
             }
 
@@ -196,7 +196,7 @@ namespace Forum.Controllers.Forum
 
             if (ids.Count() != postEntities.Count())
             {
-                //_logger.LogError("Some ids are not valid in a collection");
+                _logger.LogError("Some ids are not valid in a collection");
                 return NotFound();
             }
 
@@ -224,14 +224,14 @@ namespace Forum.Controllers.Forum
         {
             if (!ModelState.IsValid)
             {
-                //_logger.LogError("Invalid model state for the ForumPostForCreationDto object");
+                _logger.LogError("Invalid model state for the ForumPostForCreationDto object");
                 return UnprocessableEntity(ModelState);
             }
 
             var topic = await _repository.ForumTopic.GetTopicAsync(forumId, topicId, trackChanges: false);
             if (topic == null)
             {
-                //_logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
+                _logger.LogInformation($"Topic with forum id: {forumId} and topic id: {topicId} doesn't exist in the database.");
 
                 return NotFound();
             }
@@ -266,7 +266,7 @@ namespace Forum.Controllers.Forum
         {
             if (postCollection == null)
             {
-                //_logger.LogError("Post collection sent from client is null.");
+                _logger.LogError("Post collection sent from client is null.");
                 return BadRequest("Post collection is null");
             }
 
@@ -356,7 +356,7 @@ namespace Forum.Controllers.Forum
         {
             if (patchDoc == null)
             {
-                //_logger.LogError("patchDoc object sent from client is null.");
+                _logger.LogError("patchDoc object sent from client is null.");
                 return BadRequest("patchDoc object is null");
             }
 
@@ -368,7 +368,7 @@ namespace Forum.Controllers.Forum
 
             if (!ModelState.IsValid)
             {
-                //_logger.LogError("Invalid model state for the patch document");
+                _logger.LogError("Invalid model state for the patch document");
                 return UnprocessableEntity(ModelState);
             }
 
