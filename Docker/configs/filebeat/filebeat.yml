@@ -3,15 +3,6 @@ filebeat.config:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
 
-
-
-
-
-
-
-
-
-
 #processors:
 #  - add_cloud_metadata: ~
 #  - add_docker_metadata: ~
@@ -29,6 +20,7 @@ filebeat.inputs:
   enabled: true
   paths:
     - /var/log/sd-ms-arc-log/sd-ms-arc-info.log
+    - /var/log/sd-ms-arc-log/sd-ms-arc-error.log
   scan_frequency: 10s
 
 output.logstash:
