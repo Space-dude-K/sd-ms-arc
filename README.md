@@ -5,6 +5,6 @@
 - API-шлюз Ocelot
 - Authentication service + JWT Ocelot
 - Брокер сообщений RabbitMQ + MassTransit для общения мс
-- REST API-микросервисы с MSSQLServer (forum-g), PostgreSQL (free-space-checker), MongoDB (check-up-money), Redis (zp) бд для разных проектов
+- REST API-микросервисы с MSSQLServer (forum-g), PostgreSQL (free-space-checker), MongoDB (check-up-money), Redis (zp) бд для разных проектов. Рефакторинг этих проектов.
 - WebApps для forum-g, free-space-checker, check-up-money, zp
 - HealthChecks + Watchdog для микросервисов
