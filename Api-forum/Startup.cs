@@ -4,6 +4,7 @@ using Forum.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using Api_auth_JWT;
 
 namespace Forum
 {
@@ -88,7 +89,7 @@ namespace Forum
             // Authentication and autorization
             services.ConfigureIdentity();
             services.ConfigureCookie();
-            services.ConfigureJWT(Configuration);
+            services.ConfigureJWTExt(Configuration);
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
             services.AddControllersWithViews();
@@ -109,9 +110,9 @@ namespace Forum
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //var logger = app.ApplicationServices.GetService<ILogger>();
+
             ILogger<Startup> logger = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
-            logger.LogInformation("Test");
+
             app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
             // enables using static files for the request. If we don’t set a path to the static files directory, it will use a wwwroot

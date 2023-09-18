@@ -4,21 +4,22 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>api_gw_ocelot</RootNamespace>
+    <RootNamespace>Api_auth</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
-    <PackageReference Include="Ocelot" Version="19.0.2" />
-    <PackageReference Include="Ocelot.Cache.CacheManager" Version="19.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Api-auth-Entities\Api-auth-Entities.csproj" />
+    <ProjectReference Include="..\Api-auth-Interfaces\Api-auth-Interfaces.csproj" />
     <ProjectReference Include="..\Api-auth-JWT\Api-auth-JWT.csproj" />
-    <ProjectReference Include="..\Api-forum-Entities\Api-forum-Entities.csproj" />
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties ocelot_1json__JsonSchema="json" /></VisualStudio></ProjectExtensions>
 
 </Project>

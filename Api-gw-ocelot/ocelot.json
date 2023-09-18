@@ -1,11 +1,31 @@
 ﻿{
   "Routes":
   [
+    // Root
+    {
+      "UpstreamPathTemplate": "/gw",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ]
+    },
+    // Categories
     {
       "UpstreamPathTemplate": "/gw/categories",
       "UpstreamHttpMethod":
       [
-        "OPTIONS", "Get", "Post"
+        "Options",
+        "Get",
+        "Post"
       ],
       "DownstreamPathTemplate": "/api/categories",
       "DownstreamScheme": "https",
@@ -13,15 +33,26 @@
       [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5010
         }
-      ]
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
     },
     {
       "UpstreamPathTemplate": "/gw/categories/{categoryId}",
       "UpstreamHttpMethod":
       [
-        "Get", "Put", "Patch", "Delete"
+        "Get",
+        "Put",
+        "Patch",
+        "Delete"
       ],
       "DownstreamPathTemplate": "/api/categories/{categoryId}",
       "DownstreamScheme": "https",
@@ -29,7 +60,7 @@
       [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5010
         }
       ]
     },
@@ -45,7 +76,7 @@
       [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5010
         }
       ]
     },
@@ -61,7 +92,7 @@
       [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5010
         }
       ]
     }

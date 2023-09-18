@@ -22,6 +22,8 @@ using api_forum.ActionsFilters.Forum;
 using api_forum.ActionsFilters.User;
 using api_forum.ActionsFilters;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Forum.Extensions
 {
@@ -49,7 +51,7 @@ namespace Forum.Extensions
         {
             services.AddDbContext<ForumContext>(opts => 
                 opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"),
-                b => b.MigrationsAssembly("Forum")
+                b => b.MigrationsAssembly("Api-forum")
             ));
         }
         public static void ConfigureRepositoryManager(this IServiceCollection services)
@@ -144,6 +146,7 @@ namespace Forum.Extensions
         public static void ConfigureIdentityCookieAndJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
+
             var builder = services.AddIdentityCore<AppUser>(o =>
             {
                 o.Password.RequireDigit = true;
@@ -157,17 +160,15 @@ namespace Forum.Extensions
             services.AddAuthentication(options =>
             {
                 // custom scheme defined in .AddPolicyScheme() below
-                options.DefaultScheme = "JWT_OR_COOKIE";
-                options.DefaultChallengeScheme = "JWT_OR_COOKIE";
-            })
-            .AddCookie("Cookies", options =>
-            {
-                options.LoginPath = "/login";
-                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                /*options.DefaultScheme = "JWT_OR_COOKIE";
+                options.DefaultChallengeScheme = "JWT_OR_COOKIE";*/
             })
             .AddJwtBearer("Bearer", options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
+                options.Authority = jwtSettings.GetSection("identityUrl").Value;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "forum";
+                /*options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
@@ -175,22 +176,7 @@ namespace Forum.Extensions
                     ValidAudience = jwtSettings.GetSection("validAudience").Value,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.GetSection("key").Value))
-                };
-            })
-            // this is the key piece!
-            .AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
-            {
-                // runs on each request
-                options.ForwardDefaultSelector = context =>
-                {
-                    // filter by auth type
-                    string authorization = context.Request.Headers[HeaderNames.Authorization];
-                    if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
-                        return "Bearer";
-
-                    // otherwise always check for cookie auth
-                    return "Cookies";
-                };
+                };*/
             });
         }
         public static void ConfigureIdentity(this IServiceCollection services)
@@ -250,21 +236,14 @@ namespace Forum.Extensions
             var secretKey = jwtSettings.GetSection("key").Value;
             services.AddAuthentication(opt => 
             {
-                /*opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;*/
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options =>
+            .AddJwtBearer("Bearer", options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
-                    ValidAudience = jwtSettings.GetSection("validAudience").Value,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
-                };
+                //options.Authority = jwtSettings.GetSection("identityUrl").Value;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "forum";
             });
         }
         public static void ConfigureTestJWT(this IServiceCollection services, IConfiguration configuration)
@@ -278,7 +257,15 @@ namespace Forum.Extensions
             })
             .AddJwtBearer(options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "https://localhost:5001",
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                };
+                /*options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
@@ -287,7 +274,7 @@ namespace Forum.Extensions
                     ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
                     ValidAudience = jwtSettings.GetSection("validAudience").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
-                };
+                };*/
             });
         }
         public static void ConfigureSwagger(this IServiceCollection services)

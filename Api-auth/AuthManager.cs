@@ -1,20 +1,21 @@
-﻿using Interfaces;
-using Entities.DTO.UserDto;
-using Entities.Models;
+﻿using Api_auth.Models;
+using Api_auth_Entities.Models;
+using Api_auth_Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Forum
+namespace Api_auth
 {
-    public class AuthenticationManager : IAuthenticationManager
+    
+    public class AuthManager : IAuthManager
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _configuration;
         private AppUser _user;
-        public AuthenticationManager(UserManager<AppUser> userManager, IConfiguration configuration)
+        public AuthManager(UserManager<AppUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -49,11 +50,9 @@ namespace Forum
             };
 
             var roles = await _userManager.GetRolesAsync(_user);
-
             foreach (var role in roles)
             {
-                claims.Add(new Claim("Role", role));
-                //claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             return claims;
@@ -61,13 +60,20 @@ namespace Forum
         private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
-            var tokenOptions = new JwtSecurityToken
-            (
-                issuer: jwtSettings.GetSection("validIssuer").Value,
-                audience: jwtSettings.GetSection("validAudience").Value, claims: claims, 
+
+            var tokenOptions = new JwtSecurityToken(
+                issuer: "https://localhost:5001",
+                claims: claims,
                 expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
                 signingCredentials: signingCredentials
             );
+            /*var tokenOptions = new JwtSecurityToken
+            (
+                issuer: jwtSettings.GetSection("validIssuer").Value,
+                audience: jwtSettings.GetSection("validAudience").Value, claims: claims,
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
+                signingCredentials: signingCredentials
+            );*/
 
             return tokenOptions;
         }
