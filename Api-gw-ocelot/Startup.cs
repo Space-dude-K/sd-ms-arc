@@ -1,7 +1,10 @@
 ﻿using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System.Configuration;
+using api_gw_ocelot.Extensions;
+using Microsoft.IdentityModel.Logging;
+using System.IdentityModel.Tokens.Jwt;
+using Api_auth_JWT;
 
 namespace api_gw_ocelot
 {
@@ -17,6 +20,16 @@ namespace api_gw_ocelot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOcelot().AddCacheManager(settings => settings.WithDictionaryHandle());
+            services.DecorateClaimAuthoriser();
+
+            IdentityModelEventSource.ShowPII = true; //Add this line
+            //services.ConfigureSqlContext(Configuration);
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.ConfigureJWTExt(Configuration);
+            
+            //services.ConfigureIdentity();
+            //services.ConfigureCookie();
+
 
             // Add services to the container.
             /*services.AddCors(options => {
@@ -46,6 +59,9 @@ namespace api_gw_ocelot
             });
 
             await app.UseOcelot();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
         }
     }
 }

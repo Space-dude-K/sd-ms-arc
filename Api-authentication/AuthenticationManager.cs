@@ -1,4 +1,4 @@
-﻿using Interfaces;
+﻿using Auth_Interfaces;
 using Entities.DTO.UserDto;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Forum
+namespace Api_authentication
 {
     public class AuthenticationManager : IAuthenticationManager
     {
@@ -43,6 +43,9 @@ namespace Forum
         }
         private async Task<List<Claim>> GetClaims()
         {
+            // https://github.com/ThreeMammals/Ocelot/issues/679
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, _user.UserName)
@@ -50,10 +53,11 @@ namespace Forum
 
             var roles = await _userManager.GetRolesAsync(_user);
 
+            
+
             foreach (var role in roles)
             {
-                claims.Add(new Claim("Role", role));
-                //claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(new Claim("Roles", role));
             }
 
             return claims;
@@ -64,7 +68,7 @@ namespace Forum
             var tokenOptions = new JwtSecurityToken
             (
                 issuer: jwtSettings.GetSection("validIssuer").Value,
-                audience: jwtSettings.GetSection("validAudience").Value, claims: claims, 
+                audience: jwtSettings.GetSection("validAudience").Value, claims: claims,
                 expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
                 signingCredentials: signingCredentials
             );

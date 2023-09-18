@@ -4,6 +4,7 @@ using Forum.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using Api_auth_JWT;
 
 namespace Forum
 {
@@ -88,7 +89,7 @@ namespace Forum
             // Authentication and autorization
             services.ConfigureIdentity();
             services.ConfigureCookie();
-            services.ConfigureJWT(Configuration);
+            services.ConfigureJWTExt(Configuration);
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
             services.AddControllersWithViews();
