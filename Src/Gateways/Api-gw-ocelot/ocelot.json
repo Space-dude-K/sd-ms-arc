@@ -42,7 +42,7 @@
       },
       "RouteClaimsRequirement":
       {
-        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
       }
     },
     {
@@ -62,7 +62,15 @@
           "Host": "localhost",
           "Port": 5010
         }
-      ]
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
     },
     {
       "UpstreamPathTemplate": "/gw/categories/collection/({ids})",
@@ -78,7 +86,15 @@
           "Host": "localhost",
           "Port": 5010
         }
-      ]
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
     },
     {
       "UpstreamPathTemplate": "/gw/categories/collection",
@@ -94,7 +110,396 @@
           "Host": "localhost",
           "Port": 5010
         }
-      ]
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    // Forum base
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums",
+      "UpstreamHttpMethod":
+      [
+        "Options",
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}",
+      "UpstreamHttpMethod":
+      [
+        "Get",
+        "Put",
+        "Patch",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/collection/({ids})",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/collection/({ids})",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/collection",
+      "UpstreamHttpMethod":
+      [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/collection",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    // Topics
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics",
+      "UpstreamHttpMethod":
+      [
+        "Options",
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/{topicId}",
+      "UpstreamHttpMethod":
+      [
+        "Get",
+        "Put",
+        "Patch",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/{topicId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/collection/({ids})",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/collection/({ids})",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/collection",
+      "UpstreamHttpMethod":
+      [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/collection",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/tcounters/{topicId}",
+      "UpstreamHttpMethod":
+      [
+        "Get",
+        "Post",
+        "Delete",
+        "Patch"
+      ],
+      "DownstreamPathTemplate": "/api/tcounters/{topicId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/tcounters",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/tcounters",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    // Posts
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts",
+      "UpstreamHttpMethod":
+      [
+        "Options",
+        "Get",
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/{postId}",
+      "UpstreamHttpMethod":
+      [
+        "Get",
+        "Put",
+        "Patch",
+        "Delete"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/{postId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/collection/({ids})",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/collection/({ids})",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/collection",
+      "UpstreamHttpMethod":
+      [
+        "Post"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/collection",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/gw/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/count",
+      "UpstreamHttpMethod":
+      [
+        "Get"
+      ],
+      "DownstreamPathTemplate": "/api/categories/{categoryId}/forums/{forumId}/topics/{topicId}/posts/count",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts":
+      [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "AuthenticationOptions":
+      {
+        "AuthenticationProviderKey": "Bearer"
+      },
+      "RouteClaimsRequirement":
+      {
+        "http///schemas.microsoft.com/ws/2008/06/identity/claims/role": "Administrator"
+      }
     }
   ],
   "GlobalConfiguration":

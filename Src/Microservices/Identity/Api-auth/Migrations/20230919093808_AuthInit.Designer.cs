@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_auth.Migrations
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20230918134800_AuthInit")]
+    [Migration("20230919093808_AuthInit")]
     partial class AuthInit
     {
         /// <inheritdoc />
@@ -172,13 +172,35 @@ namespace Api_auth.Migrations
                     b.HasData(
                         new
                         {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            BirthDate = "17.09.2012 0:00:00",
+                            Cabinet = "844",
+                            ConcurrencyStamp = "9f871693-7787-438d-a870-a66219fe15a0",
+                            Email = "G600-U0@mfrb.by",
+                            EmailConfirmed = false,
+                            FirstName = "Ivan0",
+                            InternalPhone = "581963007",
+                            LastName = "Petrov0",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "G600-U0@MFRB.BY",
+                            NormalizedUserName = "G600-U0",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJmQy9UwxkODjbb/iQlo7ezznBC5omr0sEhFEoTgafpAxZZRFsyVCFG8NXKSc2SGJA==",
+                            PhoneNumber = "458786616292793414363722802",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "FGXU4FIM2LMJZFDJD3YCUQEHQRZY4GSS",
+                            TwoFactorEnabled = false,
+                            UserName = "G600-U0"
+                        },
+                        new
+                        {
                             Id = 1,
                             AccessFailedCount = 0,
                             BirthDate = "0",
                             Cabinet = "0",
                             Company = "My company",
-                            ConcurrencyStamp = "4e70bea9-8a47-47f3-9155-ed93261c80a1",
-                            CreatedAt = new DateTime(2023, 9, 18, 16, 48, 0, 649, DateTimeKind.Local).AddTicks(2049),
+                            ConcurrencyStamp = "dc55ef40-643a-46dc-99bb-fe74543042fe",
+                            CreatedAt = new DateTime(2023, 9, 19, 12, 38, 8, 477, DateTimeKind.Local).AddTicks(7487),
                             Division = "My division",
                             Email = "Admin@admin.by",
                             EmailConfirmed = false,
@@ -291,6 +313,11 @@ namespace Api_auth.Migrations
                         {
                             UserId = 1,
                             RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 1
                         });
                 });
 

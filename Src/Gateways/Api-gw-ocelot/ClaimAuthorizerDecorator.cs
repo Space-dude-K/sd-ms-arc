@@ -1,17 +1,18 @@
 ﻿using Ocelot.Authorization;
 using Ocelot.DownstreamRouteFinder.UrlMatcher;
 using Ocelot.Responses;
+using System.Data;
 using System.Security.Claims;
 
 namespace api_gw_ocelot
 {
     public class ClaimAuthorizerDecorator : IClaimsAuthorizer
     {
-        private readonly ClaimsAuthorizer _authoriser;
+        private readonly ClaimsAuthorizer _authorizer;
 
-        public ClaimAuthorizerDecorator(ClaimsAuthorizer authoriser)
+        public ClaimAuthorizerDecorator(ClaimsAuthorizer authorizer)
         {
-            _authoriser = authoriser;
+            _authorizer = authorizer;
         }
         public Response<bool> Authorize(ClaimsPrincipal claimsPrincipal, Dictionary<string, string> routeClaimsRequirement, 
             List<PlaceholderNameAndValue> urlPathPlaceholderNameAndValues)
@@ -30,7 +31,7 @@ namespace api_gw_ocelot
                 }
             }
 
-            return _authoriser.Authorize(claimsPrincipal, newRouteClaimsRequirement, urlPathPlaceholderNameAndValues);
+            return _authorizer.Authorize(claimsPrincipal, newRouteClaimsRequirement, urlPathPlaceholderNameAndValues);
         }
     }
 }

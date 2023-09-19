@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using Api_auth_JWT;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Forum
 {
@@ -93,7 +94,6 @@ namespace Forum
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
 
             services.AddControllersWithViews();
-
             services.ConfigureSwagger();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

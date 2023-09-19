@@ -9,7 +9,7 @@ namespace Api_auth_Entities.Configurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.HasData(
-            SeedUsers(5));
+            SeedUsers(1));
         }
         private List<AppUser> SeedUsers(int usersCount)
         {
@@ -30,8 +30,12 @@ namespace Api_auth_Entities.Configurations
                     Email = "G600-U" + i + "@mfrb.by",
                     NormalizedEmail = ("G600-U" + i + "@mfrb.by").ToUpper(),
                     PhoneNumber = Random.Shared.Next().ToString() + Random.Shared.Next().ToString() 
-                    + Random.Shared.Next().ToString()
+                    + Random.Shared.Next().ToString(),
+                    PasswordHash = "AQAAAAIAAYagAAAAEJmQy9UwxkODjbb/iQlo7ezznBC5omr0sEhFEoTgafpAxZZRFsyVCFG8NXKSc2SGJA==",
+                    SecurityStamp = "FGXU4FIM2LMJZFDJD3YCUQEHQRZY4GSS"
                 };
+
+                users.Add(appUser);
             }
 
             users.Add(SeedSystemAdmin());

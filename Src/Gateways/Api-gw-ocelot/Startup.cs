@@ -2,9 +2,9 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using api_gw_ocelot.Extensions;
-using Microsoft.IdentityModel.Logging;
-using System.IdentityModel.Tokens.Jwt;
 using Api_auth_JWT;
+using Ocelot.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace api_gw_ocelot
 {
@@ -21,23 +21,7 @@ namespace api_gw_ocelot
         {
             services.AddOcelot().AddCacheManager(settings => settings.WithDictionaryHandle());
             services.DecorateClaimAuthoriser();
-
-            IdentityModelEventSource.ShowPII = true; //Add this line
-            //services.ConfigureSqlContext(Configuration);
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.ConfigureJWTExt(Configuration);
-            
-            //services.ConfigureIdentity();
-            //services.ConfigureCookie();
-
-
-            // Add services to the container.
-            /*services.AddCors(options => {
-                options.AddPolicy("CORSPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            });*/
-            //Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-
-            //services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +41,21 @@ namespace api_gw_ocelot
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+
+            var ocelotConfig = new OcelotPipelineConfiguration
+            {
+                AuthorizationMiddleware = async (ctx, next) =>
+                {
+                    if (ctx.AuthorizeMultipleRoles())
+                    {
+                        await next.Invoke();
+                    }
+                    else
+                    {
+                        ctx.Items.SetError(new UnauthorizedError($"Fail to authorize"));
+                    }
+                }
+            };
 
             await app.UseOcelot();
 

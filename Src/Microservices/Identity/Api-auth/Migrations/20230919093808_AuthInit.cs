@@ -182,7 +182,11 @@ namespace Api_auth.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "BirthDate", "Cabinet", "Company", "ConcurrencyStamp", "CreatedAt", "Division", "Email", "EmailConfirmed", "FirstName", "InternalPhone", "LastName", "LatestLoginOnForum", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "0", "0", "My company", "4e70bea9-8a47-47f3-9155-ed93261c80a1", new DateTime(2023, 9, 18, 16, 48, 0, 649, DateTimeKind.Local).AddTicks(2049), "My division", "Admin@admin.by", false, "System", "0", "Admin", null, false, null, "ADMIN@ADMIN.BY", "ADMIN", "AQAAAAIAAYagAAAAEJmQy9UwxkODjbb/iQlo7ezznBC5omr0sEhFEoTgafpAxZZRFsyVCFG8NXKSc2SGJA==", "0", false, "Administrator", "FGXU4FIM2LMJZFDJD3YCUQEHQRZY4GSS", false, "Admin" });
+                values: new object[,]
+                {
+                    { 1, 0, "0", "0", "My company", "dc55ef40-643a-46dc-99bb-fe74543042fe", new DateTime(2023, 9, 19, 12, 38, 8, 477, DateTimeKind.Local).AddTicks(7487), "My division", "Admin@admin.by", false, "System", "0", "Admin", null, false, null, "ADMIN@ADMIN.BY", "ADMIN", "AQAAAAIAAYagAAAAEJmQy9UwxkODjbb/iQlo7ezznBC5omr0sEhFEoTgafpAxZZRFsyVCFG8NXKSc2SGJA==", "0", false, "Administrator", "FGXU4FIM2LMJZFDJD3YCUQEHQRZY4GSS", false, "Admin" },
+                    { 2, 0, "17.09.2012 0:00:00", "844", null, "9f871693-7787-438d-a870-a66219fe15a0", null, null, "G600-U0@mfrb.by", false, "Ivan0", "581963007", "Petrov0", null, false, null, "G600-U0@MFRB.BY", "G600-U0", "AQAAAAIAAYagAAAAEJmQy9UwxkODjbb/iQlo7ezznBC5omr0sEhFEoTgafpAxZZRFsyVCFG8NXKSc2SGJA==", "458786616292793414363722802", false, null, "FGXU4FIM2LMJZFDJD3YCUQEHQRZY4GSS", false, "G600-U0" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -190,7 +194,8 @@ namespace Api_auth.Migrations
                 values: new object[,]
                 {
                     { 1, 1 },
-                    { 2, 1 }
+                    { 2, 1 },
+                    { 1, 2 }
                 });
 
             migrationBuilder.CreateIndex(

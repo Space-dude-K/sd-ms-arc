@@ -33,6 +33,11 @@ namespace Api_auth_Entities
                 {
                     RoleId = 2,
                     UserId = 1
+                },
+                new IdentityUserRole<int>
+                {
+                    RoleId = 1,
+                    UserId = 2
                 }
             );
         }
