@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Api-auth-JWT\Api-auth-JWT.csproj" />
+    <ProjectReference Include="..\..\Identity\Api-auth-JWT\Api-auth-JWT.csproj" />
     <ProjectReference Include="..\Api-forum-Entities\Api-forum-Entities.csproj" />
     <ProjectReference Include="..\Api-forum-Interfaces\Api-forum-Interfaces.csproj" />
     <ProjectReference Include="..\Api-forum-Repository\Api-forum-Repository.csproj" />
