@@ -1,3 +1,5 @@
+using Api_fsc_Entities;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 
@@ -11,6 +13,12 @@ namespace Api_fsc
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<FscContext>(options =>
+            {
+                var connectionString = builder.Configuration.GetConnectionString("dbConnection");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+                b => b.MigrationsAssembly("Api-fsc"));
+            });
 
             builder.Services.AddControllers();
 
