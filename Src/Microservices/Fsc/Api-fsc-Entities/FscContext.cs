@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Api_fsc_Entities.Configurations;
+using Api_fsc_Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api_fsc_Entities
 {
@@ -20,7 +17,8 @@ namespace Api_fsc_Entities
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new DeviceConfiguration());
         }
+        public DbSet<Device> Devices { get; set; }
     }
 }
