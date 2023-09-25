@@ -1,7 +1,7 @@
 ﻿using check_up_money.Cypher;
 using System.Security;
 
-namespace FreeSpaceChecker.Interfaces
+namespace Api_fsc_Interfaces
 {
     interface ICypher
     {

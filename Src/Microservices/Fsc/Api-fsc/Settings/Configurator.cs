@@ -1,4 +1,6 @@
-﻿using check_up_money.Cypher;
+﻿using Api_fsc_Entities.DTO;
+using Api_fsc_Entities.Models;
+using check_up_money.Cypher;
 using FreeSpaceChecker.Settings.CheckObject;
 using FreeSpaceChecker.Settings.Email;
 using System;
@@ -60,15 +62,15 @@ namespace FreeSpaceChecker.Settings
 
             myConfig.CurrentConfiguration.Save();
         }
-        public List<Comp> LoadCompSettings()
+        public List<DeviceSettingDTO> LoadCompSettings()
         {
-            List<Comp> comps = new List<Comp>();
+            List<DeviceSettingDTO> comps = new();
 
             SettingsConfiguration myConfig = (SettingsConfiguration)ConfigurationManager.GetSection("settings");
 
             foreach(CheckObjectElement compSetting in myConfig.CheckObjects)
             {
-                Comp comp = new Comp();
+                DeviceSettingDTO comp = new();
                 comp.Ip = compSetting.ObjectIp;
 
                 if (compSetting.ObjectDisks != string.Empty)
