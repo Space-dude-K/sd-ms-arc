@@ -1,5 +1,5 @@
 ﻿
-namespace FreeSpaceChecker
+namespace Api_fsc_Entities.Models
 {
     public class Mail
     {
