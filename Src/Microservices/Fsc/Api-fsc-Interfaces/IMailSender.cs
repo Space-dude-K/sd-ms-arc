@@ -1,4 +1,4 @@
-﻿namespace FreeSpaceChecker
+﻿namespace Api_fsc_Interfaces
 {
     interface IMailSender
     {

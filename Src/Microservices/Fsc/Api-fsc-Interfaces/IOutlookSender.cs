@@ -1,5 +1,5 @@
 ﻿
-namespace FreeSpaceChecker.Interfaces
+namespace Api_fsc_Interfaces
 {
     interface IOutlookSender
     {
