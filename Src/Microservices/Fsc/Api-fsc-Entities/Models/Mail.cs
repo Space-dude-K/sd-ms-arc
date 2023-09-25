@@ -1,7 +1,7 @@
 ﻿
 namespace FreeSpaceChecker
 {
-    class Mail
+    public class Mail
     {
         private string email;
 

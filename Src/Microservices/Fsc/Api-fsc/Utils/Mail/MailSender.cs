@@ -1,4 +1,4 @@
-﻿using FreeSpaceChecker.Interfaces;
+﻿using Api_fsc_Interfaces;
 using System.Net.Mail;
 
 namespace FreeSpaceChecker
