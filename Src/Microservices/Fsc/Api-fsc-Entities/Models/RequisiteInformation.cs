@@ -1,5 +1,5 @@
 ﻿using System.Security;
-namespace check_up_money.Cypher
+namespace Api_fsc_Entities.Models
 {
     public class RequisiteInformation
     {

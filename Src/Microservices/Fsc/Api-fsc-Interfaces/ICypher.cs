@@ -1,9 +1,9 @@
-﻿using check_up_money.Cypher;
+﻿using Api_fsc_Entities.Models;
 using System.Security;
 
 namespace Api_fsc_Interfaces
 {
-    interface ICypher
+    public interface ICypher
     {
         RequisiteInformation Encrypt(
             SecureString user, SecureString pass);

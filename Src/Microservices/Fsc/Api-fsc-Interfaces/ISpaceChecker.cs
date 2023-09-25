@@ -1,8 +1,10 @@
 ﻿
+using Api_fsc_Entities.Models;
+
 namespace Api_fsc_Interfaces
 {
-    interface ISpaceChecker
+    public interface ISpaceChecker
     {
-        Tuple<ulong, ulong> CheckSpace(string ip, string disk, ILogger logger, RequisiteInformation req, ICypher cypher, bool isShare = false);
+        Tuple<ulong, ulong> CheckSpace(string ip, string disk, RequisiteInformation req, ICypher cypher, bool isShare = false);
     }
 }
