@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Api-fsc-Entities\Api-fsc-Entities.csproj" />
+    <ProjectReference Include="..\Api-fsc-Interfaces\Api-fsc-Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>

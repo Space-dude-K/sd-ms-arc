@@ -1,12 +1,7 @@
-﻿using Api_fsc_Entities.DTO;
-using Api_fsc_Entities.Models;
-using check_up_money.Cypher;
+﻿using Api_fsc_Entities.Models;
 using FreeSpaceChecker.Settings.CheckObject;
 using FreeSpaceChecker.Settings.Email;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace FreeSpaceChecker.Settings
@@ -43,34 +38,40 @@ namespace FreeSpaceChecker.Settings
 
             return config;
         }
-        public (string admLogin, string loginSalt, string admPass, string passSalt) LoadAdminSettings()
+        public AdminSetting LoadAdminSettings()
         {
             Configuration config = LoadConfig();
             var myConfig = config.GetSection("settings") as SettingsConfiguration;
 
-            return (myConfig.AdminLogin, myConfig.LoginSalt, myConfig.AdminPass, myConfig.PassSalt);
+            return new AdminSetting()
+            { 
+                AdminLogin = myConfig.AdminLogin, 
+                AdminLoginSalt = myConfig.LoginSalt, 
+                AdminPassword = myConfig.AdminPass, 
+                AdminPasswordSalt = myConfig.PassSalt 
+            };
         }
-        public void SaveAdminSettings((string admLogin, string loginSalt, string admPass, string passSalt) req)
+        public void SaveAdminSettings(AdminSetting req)
         {
             Configuration config = LoadConfig();
             SettingsConfiguration myConfig = config.GetSection("settings") as SettingsConfiguration;
 
-            myConfig.AdminLogin = req.admLogin;
-            myConfig.LoginSalt = req.loginSalt;
-            myConfig.AdminPass = req.admPass;
-            myConfig.PassSalt = req.passSalt;
+            myConfig.AdminLogin = req.AdminLogin;
+            myConfig.LoginSalt = req.AdminLoginSalt;
+            myConfig.AdminPass = req.AdminPassword;
+            myConfig.PassSalt = req.AdminPasswordSalt;
 
             myConfig.CurrentConfiguration.Save();
         }
-        public List<DeviceSettingDTO> LoadCompSettings()
+        public List<DeviceSetting> LoadCompSettings()
         {
-            List<DeviceSettingDTO> comps = new();
+            List<DeviceSetting> comps = new();
 
             SettingsConfiguration myConfig = (SettingsConfiguration)ConfigurationManager.GetSection("settings");
 
             foreach(CheckObjectElement compSetting in myConfig.CheckObjects)
             {
-                DeviceSettingDTO comp = new();
+                DeviceSetting comp = new();
                 comp.Ip = compSetting.ObjectIp;
 
                 if (compSetting.ObjectDisks != string.Empty)
@@ -87,7 +88,7 @@ namespace FreeSpaceChecker.Settings
 
             return comps;
         }
-        public (bool sendEmail, string smtpServer, string mailFrom) LoadSmtpSettings()
+        public SmtpSetting LoadSmtpSettings()
         {
             Configuration config = LoadConfig();
             SettingsConfiguration myConfig = config.GetSection("settings") as SettingsConfiguration;
@@ -95,18 +96,23 @@ namespace FreeSpaceChecker.Settings
             bool sendEmail = false;
             bool.TryParse(myConfig.Emails.SendEmail, out sendEmail);
 
-            return (sendEmail, myConfig.Emails.SmtpServer, myConfig.Emails.MailFrom);
+            return new SmtpSetting() 
+            { 
+                SendEmail = sendEmail, 
+                StmpServerAddress = myConfig.Emails.SmtpServer, 
+                MailFrom = myConfig.Emails.MailFrom 
+            };
         }
         public List<Mail> LoadMailSettings()
         {
-            List<Mail> emails = new List<Mail>();
+            List<Mail> emails = new();
 
             Configuration config = LoadConfig();
             SettingsConfiguration myConfig = config.GetSection("settings") as SettingsConfiguration;
 
             foreach (EmailElement mailSetting in myConfig.Emails)
             {
-                Mail mail = new Mail();
+                Mail mail = new();
                 mail.Email = mailSetting.Email;
                 mail.Subject = mailSetting.Subject;
 
