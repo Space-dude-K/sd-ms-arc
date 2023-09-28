@@ -5,6 +5,7 @@ using Api_pdc_Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using NLog.Web;
 
 namespace Api_pdc
 {
@@ -15,6 +16,11 @@ namespace Api_pdc
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            // NLog: Setup NLog for Dependency injection
+            builder.Logging.ClearProviders();
+            builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+            builder.Host.UseNLog();
 
             // MongoDb
             builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
