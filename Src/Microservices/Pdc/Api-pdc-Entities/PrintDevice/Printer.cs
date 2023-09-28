@@ -1,10 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Api_pdc_Entities.PrintDevice
 {
@@ -15,5 +10,8 @@ namespace Api_pdc_Entities.PrintDevice
         public string? Id { get; set; }
         public string? Ip { get; set; }
         public string? DeviceType { get; set; }
+        public int? NumberOfPages { get; set; }
+        public int? DrumLevel { get; set; }
+        public int? TonerLevel { get; set; }
     }
 }
