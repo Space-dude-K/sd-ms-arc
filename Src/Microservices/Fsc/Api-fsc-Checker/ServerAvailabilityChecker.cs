@@ -1,4 +1,4 @@
-﻿using FreeSpaceChecker.Interfaces;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Net.NetworkInformation;
 
@@ -25,7 +25,7 @@ namespace Api_fsc_Checker
                 }
                 catch (Exception ex)
                 {
-                    logger.Log(serverIpOrDnsName + " -> " + ex.Message);
+                    //logger.Log(serverIpOrDnsName + " -> " + ex.Message);
                 }
             }
 
