@@ -1,5 +1,6 @@
-﻿using check_up_money.Cypher;
-using FreeSpaceChecker.Interfaces;
+﻿using Api_fsc_Entities.Models;
+using Api_fsc_Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Management;
@@ -90,7 +91,7 @@ namespace Api_fsc_Checker
             }
             catch(Exception ex)
             {
-                logger.Log("Errors with server " + ip + " " + diskOrShare + " Message: " + ex.Message);
+                logger.LogError("Errors with server " + ip + " " + diskOrShare + " Message: " + ex.Message);
             }
  
             return new Tuple<ulong,ulong>(calculatedSpace, calculatedCapacity);
@@ -110,9 +111,14 @@ namespace Api_fsc_Checker
                                               out TotalNumberOfFreeBytes);
             if (!success)
             {
-                logger.Log("Network error! IP: " + ip + " Share: " + share);
+                logger.LogError("Network error! IP: " + ip + " Share: " + share);
             }
             return new Tuple<ulong,ulong>(FreeBytesAvailable, TotalNumberOfBytes);
+        }
+
+        public Tuple<ulong, ulong> CheckSpace(string ip, string disk, RequisiteInformation req, ICypher cypher, bool isShare = false)
+        {
+            throw new NotImplementedException();
         }
     }
 }

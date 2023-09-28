@@ -1,20 +1,19 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using Mongo.Migration.Documents.Attributes;
-using Mongo.Migration.Documents;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Api_pdc_Entities.PrintDevice
 {
-    [RuntimeVersion("0.1.1")]
-    [StartUpVersion("0.0.1")]
-    [CollectionLocation("Printer", "TestPrinters")]
-    public class Printer : IDocument
+    public class Printer
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         public string? Ip { get; set; }
         public string? DeviceType { get; set; }
-        public DocumentVersion Version { get; set; }
     }
 }

@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDBMigrations" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Api-pdc-Interfaces\Api-pdc-Interfaces.csproj" />
+    <PackageReference Include="Mongo.Migration" Version="3.1.4" />
   </ItemGroup>
 
 </Project>

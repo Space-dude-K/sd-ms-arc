@@ -1,14 +1,16 @@
 ﻿using Api_pdc_Interfaces.MongoDbRepository;
-using Api_pdc_Interfaces;
+
 using MongoDB.Bson;
 using System.Linq.Expressions;
 using MongoDB.Driver;
 using Api_pdc_Entities.CollectionAttributes;
+using Mongo.Migration.Documents;
+using Api_pdc_Interfaces;
 
 namespace Api_pdc_Repository
 {
     public class MongoRepository<TDocument> : IMongoRepository<TDocument>
-    where TDocument : IDocument
+    where TDocument : Api_pdc_Interfaces.IDocument
     {
         private readonly IMongoCollection<TDocument> _collection;
 

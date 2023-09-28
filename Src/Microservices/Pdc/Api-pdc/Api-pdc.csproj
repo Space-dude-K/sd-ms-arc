@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Api-pdc-Repository\Api-pdc-Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Settings\" />
+  </ItemGroup>
+
 </Project>
