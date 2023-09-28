@@ -7,7 +7,7 @@
 - REST API-микросервисы с бд + рефакторинг:
     - MSSQLServer (identity, forum-g)
     - MySql (free-space-checker)
-    - MongoDB (check-up-money)
+    - MongoDB (print-data-crawler)
     - PostgreSQL (zp),
     - Redis (?) бд для разных проектов.
 - WebApps для forum-g, free-space-checker, check-up-money, zp
