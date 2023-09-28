@@ -1,11 +1,15 @@
+using Api_pdc.Extensions;
 using Api_pdc.Settings;
 using Api_pdc_Interfaces;
 using Api_pdc_Interfaces.MongoDbRepository;
 using Api_pdc_Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Mongo.Migration.Startup;
+using Mongo.Migration.Startup.DotNetCore;
 using MongoDB.Driver;
 using NLog.Web;
+using System.Text;
 
 namespace Api_pdc
 {
@@ -23,15 +27,24 @@ namespace Api_pdc
             builder.Host.UseNLog();
 
             // MongoDb
-            builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
-            builder.Services.AddSingleton<IMongoDbSettings>(serviceProvider =>
-                serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
+            builder.Services.AddSingleton<IMongoClient>(
+                new MongoClient(builder.Configuration.GetSection("MongoDbSettings:ConnectionString").Value));
+            builder.Services.AddMigration(new MongoMigrationSettings
+            {
+                ConnectionString = builder.Configuration.GetSection("MongoDbSettings:ConnectionString").Value,
+                Database = builder.Configuration.GetSection("MongoDbSettings:DatabaseName").Value
+                //VersionFieldName = "TestVersionName" // Optional
+            });
 
             builder.Services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
 
             builder.Services.AddControllers();
 
             var app = builder.Build();
+
+            
+
+
 
             /*app.MapGet("/", async (MongoClient client) =>     // получаем MongoClient через DI
             {

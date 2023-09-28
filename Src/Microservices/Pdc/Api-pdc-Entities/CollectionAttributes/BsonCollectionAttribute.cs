@@ -1,4 +1,4 @@
-﻿namespace Api_pdc_Entities
+﻿namespace Api_pdc_Entities.CollectionAttributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute

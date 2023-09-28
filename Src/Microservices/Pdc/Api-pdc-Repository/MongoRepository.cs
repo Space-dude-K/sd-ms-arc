@@ -3,7 +3,7 @@ using Api_pdc_Interfaces;
 using MongoDB.Bson;
 using System.Linq.Expressions;
 using MongoDB.Driver;
-using Api_pdc_Entities;
+using Api_pdc_Entities.CollectionAttributes;
 
 namespace Api_pdc_Repository
 {

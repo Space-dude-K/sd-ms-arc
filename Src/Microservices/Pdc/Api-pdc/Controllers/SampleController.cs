@@ -8,10 +8,12 @@ namespace Api_pdc.Controllers
     [Route("[controller]")]
     public class SampleController : ControllerBase
     {
+        private readonly ILogger<SampleController> _logger;
         private readonly IMongoRepository<Person> _peopleRepository;
 
-        public SampleController(IMongoRepository<Person> peopleRepository)
+        public SampleController(ILogger<SampleController> logger, IMongoRepository<Person> peopleRepository)
         {
+            _logger = logger;
             _peopleRepository = peopleRepository;
         }
 
