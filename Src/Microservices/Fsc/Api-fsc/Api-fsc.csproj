@@ -36,8 +36,4 @@
     <ProjectReference Include="..\Api-fsc-Interfaces\Api-fsc-Interfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

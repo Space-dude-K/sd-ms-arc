@@ -75,7 +75,8 @@ services:
     mem_limit: 1g
     volumes:
       - ./configs/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - ../Api-forum/bin/Debug/net7.0/logs:/var/log/sd-ms-arc-log
+      - ../Src/Microservices/Forum/Api-forum/bin/Debug/net7.0/logs:/var/log/sd-ms-arc-log
+      - ../Src/Microservices/Fsc/Api-fsc/bin/Debug/net7.0/logs:/var/log/sd-ms-arc-log
     # disable strict permission checks
     command: ["--strict.perms=false"]
 networks:
